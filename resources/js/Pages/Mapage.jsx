@@ -4,8 +4,8 @@ function Mapage(){
     return(
         <AuthenticatedLayout>
             <div>
-                <h1>ma page proteger</h1>
-                <p>accessible uniquement quand tu es connecter</p>
+                <h1>Ma Page Protégée</h1>
+                <p>accessible uniquement quand tu es connecté</p>
             </div>
         </AuthenticatedLayout>
     );
