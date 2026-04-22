@@ -40,5 +40,35 @@ class ProduitController extends Controller
     return redirect()->route('produits.create')->with('success' ,'produit ajouter !');
    }
 
+   //afficher le formulaire de modification
+   public function edit($id){
+    $produit= Produit::findOrFail($id);
+    return Inertia::render('Produits/Edit', ['produit' => $produit]);
+   }
+
+   //recevoir le formulaire de modification
+   public function update(Request $request, $id){
+    //validation de donnees
+    $request->validate([
+        'nom'=> 'required|min:3',
+        'prix'=>'required|numeric|min:0'
+    ]);
+    //recuperer le produit
+    $produit = Produit::findOrFail($id);
+    //modifier le produit
+    $produit->update([
+        'nom'=>$request->nom,
+        'prix'=>$request->prix
+    ]);
+    //redirection
+    return redirect()->route('produits.index')->with('success','produit modifier');
+   }
+   //supprimer un produit
+   public function destroy($id){
+    $produit = Produit::findOrFail($id);
+    $produit ->delete();
+    return redirect()->route('produits.index')->with('success', 'produit supprimer');
+   }
+
 
 }
